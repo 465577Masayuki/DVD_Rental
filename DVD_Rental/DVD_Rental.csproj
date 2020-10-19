@@ -67,10 +67,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sasaki_masayuki\100_regression_management\regression_management.aspx" />
+    <Content Include="sasaki_masayuki\101_return_confirmation\return_confirmation.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sasaki_masayuki\0_common\C_Sasaki_Common .cs" />
+    <Compile Include="sasaki_masayuki\100_regression_management\regression_management.aspx.cs">
+      <DependentUpon>regression_management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sasaki_masayuki\100_regression_management\regression_management.aspx.designer.cs">
+      <DependentUpon>regression_management.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sasaki_masayuki\101_return_confirmation\return_confirmation.aspx.cs">
+      <DependentUpon>return_confirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sasaki_masayuki\101_return_confirmation\return_confirmation.aspx.designer.cs">
+      <DependentUpon>return_confirmation.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -81,6 +98,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
