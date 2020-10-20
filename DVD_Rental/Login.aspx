@@ -15,6 +15,7 @@
             <asp:Label ID="Label2" runat="server" Text="パスワード"></asp:Label><br />
             <asp:TextBox ID="passwd" runat="server" TextMode="Password" MaxLength="25"></asp:TextBox><br />
             <asp:Button ID="Button1" runat="server" Text="ログイン" OnClick="Button1_Click" />
+            <asp:Label ID="Label3" runat="server" Text="テスト"></asp:Label>
         </div>
     </form>
 

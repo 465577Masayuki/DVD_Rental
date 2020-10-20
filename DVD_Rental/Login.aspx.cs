@@ -36,25 +36,40 @@ namespace DVD_Rental
 
 
                     //データベース
-                    /*ConnectDB db = new ConnectDB();
+                    ConnectDB db = new ConnectDB();
                     string[] status = db.auth(user_id.Text,passwd.Text);
 
-                    if(int.Parse(status[0]) == 1)
+                    try
                     {
-                        //管理者フラグ成立
-                        Session.Remove("id_err_flag");
-                        Session.Remove("pw_err_flag");
+                        if (Convert.ToBoolean(status[0]) == true)
+                        {
+                            //管理者フラグ成立
+                            //Session.Remove("id_err_flag");
+                            //Session.Remove("pw_err_flag");
+
+                            Session[status[1]] = "1";
+                            Response.Cookies["login"].Value = status[1];
+                            Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
+                        }
+                        else if (Convert.ToBoolean(status[0]) == false)
+                        {
+                            //管理者フラグ非成立
+                            //Session.Remove("id_err_flag");
+                            //Session.Remove("pw_err_flag");
+
+                            Session[status[1]] = "0";
+                            Response.Cookies["login"].Value = status[1];
+                            Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
+                        }
                     }
-                    else if(int.Parse(status[0]) == 0)
+                    catch(Exception err)
                     {
-                        //管理者フラグ非成立
-                        Session.Remove("id_err_flag");
-                        Session.Remove("pw_err_flag");
+                        if (int.Parse(status[0]) == -1)
+                        {
+                            //ログインできない
+                        }
                     }
-                    else
-                    {
-                        //ログインできない
-                    }*/
+
                 }
                 else
                 {
