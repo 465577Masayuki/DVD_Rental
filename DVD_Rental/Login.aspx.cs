@@ -12,7 +12,43 @@ namespace DVD_Rental
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (Request.Cookies["login"] != null)
+            {
+                if (Request.Cookies["login"].Value != "")
+                {
+                    if (Session[Request.Cookies["login"].Value] != null)
+                    {
+                        if (Session[Request.Cookies["login"].Value].ToString() == "0")
+                        {
+                            Response.Redirect("rental.aspx");
+                        }
+                        else if(Session[Request.Cookies["login"].Value].ToString() == "1")
+                        {
+                            Response.Redirect("admin_page.aspx");
+                        }
+                        else
+                        {
+                            Session[Request.Cookies["login"].Value] = null;
+                            Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+                        }
+                    }
+                    else
+                    {
+                        Session[Request.Cookies["login"].Value] = null;
+                        Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+                    }
+                }
+                else
+                {
+                    Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+                }
+            }
+            else
+            {
+                Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+            }
+
+            if (!IsPostBack)
             {
                 Session["id_err_flag"] = 0;
                 Session["pw_err_flag"] = 0;
@@ -44,18 +80,19 @@ namespace DVD_Rental
                         if (Convert.ToBoolean(status[0]) == true)
                         {
                             //管理者フラグ成立
-                            //Session.Remove("id_err_flag");
-                            //Session.Remove("pw_err_flag");
+                            Session.Remove("id_err_flag");
+                            Session.Remove("pw_err_flag");
 
                             Session[status[1]] = "1";
                             Response.Cookies["login"].Value = status[1];
                             Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
+                            Response.Redirect("admin_page.aspx");
                         }
                         else if (Convert.ToBoolean(status[0]) == false)
                         {
                             //管理者フラグ非成立
-                            //Session.Remove("id_err_flag");
-                            //Session.Remove("pw_err_flag");
+                            Session.Remove("id_err_flag");
+                            Session.Remove("pw_err_flag");
 
                             Session[status[1]] = "0";
                             Response.Cookies["login"].Value = status[1];
@@ -64,7 +101,7 @@ namespace DVD_Rental
                     }
                     catch(Exception err)
                     {
-                        if (int.Parse(status[0]) == -1)
+                        if (status[0] == "-1")
                         {
                             //ログインできない
                         }
@@ -84,6 +121,7 @@ namespace DVD_Rental
                 if (new Regex("^[0-9a-zA-Z]+$").IsMatch(passwd.Text))
                 {
                     //IDのエラー
+                    Session["pw_err_flag"] = 0;
                     Session["id_err_flag"] = 1;
                 }
                 else
