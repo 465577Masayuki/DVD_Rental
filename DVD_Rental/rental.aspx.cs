@@ -19,7 +19,7 @@ namespace DVD_Rental
                     {
                         if (Session[Request.Cookies["login"].Value].ToString() == "1")
                         {
-                            Response.Redirect("admin_page.aspx");
+                            Response.Redirect("./sasaki_masayuki/100_regression_management/regression_management.aspx");
                         }
                     }
                     else

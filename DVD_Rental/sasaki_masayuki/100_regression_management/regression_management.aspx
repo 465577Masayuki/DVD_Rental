@@ -15,7 +15,7 @@
             <%-- 1行目--%>
             <p>
                 <%-- ログアウトボタン--%>
-                <asp:Button ID="Button1" runat="server" Text="ログアウト" />
+                <asp:Button ID="Button1" runat="server" Text="ログアウト" OnClick="Button1_Click" />
             </p>
 
             <%-- 2行目--%>

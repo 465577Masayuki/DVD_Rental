@@ -24,7 +24,7 @@ namespace DVD_Rental
                         }
                         else if(Session[Request.Cookies["login"].Value].ToString() == "1")
                         {
-                            Response.Redirect("admin_page.aspx");
+                            Response.Redirect("./sasaki_masayuki/100_regression_management/regression_management.aspx");
                         }
                         else
                         {
@@ -86,7 +86,7 @@ namespace DVD_Rental
                             Session[status[1]] = "1";
                             Response.Cookies["login"].Value = status[1];
                             Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
-                            Response.Redirect("admin_page.aspx");
+                            Response.Redirect("./sasaki_masayuki/100_regression_management/regression_management.aspx");
                         }
                         else if (Convert.ToBoolean(status[0]) == false)
                         {
@@ -97,6 +97,7 @@ namespace DVD_Rental
                             Session[status[1]] = "0";
                             Response.Cookies["login"].Value = status[1];
                             Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
+                            Response.Redirect("rental.aspx");
                         }
                     }
                     catch(Exception err)
