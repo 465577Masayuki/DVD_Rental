@@ -41,7 +41,7 @@
             <%-- 5行目--%>
             <p>
                 <%--チェックボックスのリスト--%>
-                <asp:CheckBoxList ID="CheckBoxList1" runat="server">
+                <asp:CheckBoxList ID="CheckBoxList1" runat="server" OnSelectedIndexChanged="CheckBoxList1_SelectedIndexChanged">
                 </asp:CheckBoxList>
             </p>
 
