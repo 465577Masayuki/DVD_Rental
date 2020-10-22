@@ -31,9 +31,10 @@
             <p>
                 <%-- 会員ID（テキスト）の表示--%>
                 <asp:Label ID="Label1" runat="server" Text="会員ID"></asp:Label>
+               
                 <%-- テキストボックスの挿入--%>
                 <%--                            Columns:(テキストボックスの横幅) style:(入力テキストの右寄せ)--%>
-                <asp:TextBox ID="TextBox1" runat="server" Columns="30" Style="text-align: right" OnTextChanged="TextBox1_TextChanged" Numeric="true"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" Columns="30" Style="text-align: right" OnTextChanged="TextBox1_TextChanged"  TextMode ="Number"></asp:TextBox>
             </p>
 
             <%-- 4行目--%>

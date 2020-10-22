@@ -64,7 +64,7 @@ namespace DVD_Rental.sasaki_masayuki._100_regression_management
         protected void Button2_Click(object sender, EventArgs e)
         {
             View_Items_Currently_Being_Rented();
-            m_member_id = int.Parse(Get_MemberId_From_TextBox());
+            
         }
 
         //選択した商品を返却　ボタン
@@ -106,6 +106,8 @@ namespace DVD_Rental.sasaki_masayuki._100_regression_management
                 if (selected_dvd_id.Count != 0)
                 {
                     Label3.Text = "";
+                    Session.Remove("confirmation_error");
+
                     List<string> stock_update_date_time_storehouse;
                     //dvd_idからUpdate_Date_Timeを求める
                     stock_update_date_time_storehouse = C_Sasaki_Common.Get_Stock_Update_Date_Time_For_DVD_Id(selected_dvd_id);
@@ -152,11 +154,12 @@ namespace DVD_Rental.sasaki_masayuki._100_regression_management
         {
             //入力されたテキストを取得
             string member_id_storehouse = Get_MemberId_From_TextBox();
-            if (member_id_storehouse != null)
+            if (member_id_storehouse != "")
             {
                 //テキストが入力されていたら
 
 
+                m_member_id = int.Parse(Get_MemberId_From_TextBox());
                 //チェックボックスのクリア
                 CheckBoxList1.Items.Clear();
 
