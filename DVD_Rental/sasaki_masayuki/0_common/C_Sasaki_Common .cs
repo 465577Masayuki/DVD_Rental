@@ -158,8 +158,63 @@ namespace DVD_Rental.sasaki_masayuki._0_common
             return dvd_name_storehouse;
         }
 
+        //ログインネームからIDに変換します。
+        //[in] a_request(HttpRequest) 
+        //return string IDが出力されます。
+        public static int Login_Name_To_Id(HttpRequest a_request)
+        {
+            //変換した物の出力先
+            string id_storehouse = null;
+            C_Sasaki_Common.Select_SQL("Select * From [dbo].[User] Where LoginName = '" + a_request.Cookies["login"].Value + "'", "Id", ref id_storehouse);
+            return int.Parse(id_storehouse);
+        }
 
+        //更新日時のゲット
+        //[in] string(a_db_name) データベースの名前 dboとか[]とかはいらない。純粋に名前。
+        //[in] string(a_where) どの箇所をゲットするか。
+        //[out] string(a_storehouse)　取得したDateTimeの格納先。※複数あった場合は最後にSelectされた一つしか取得できません。
+        public static void SQL_Get_Update_Date_Time(string a_db_name, string a_where, ref string a_storehouse)
+        {
+            C_Sasaki_Common.Select_SQL("Select * From [dbo].[" + a_db_name + "] Where " + a_where, "UpdateDateTime",ref a_storehouse);
+        }
 
+        //Dvd_IDからStockのUpdateDateTimeを求める
+        //[in] List<int>(a_selected_dvd_id) 選択されたdvd_id群
+        //return List<string> a_selected_dvd_idの順に格納されたUpdateDateTime
+        public static List<string> Get_Stock_Update_Date_Time_For_DVD_Id(List<string> a_selected_dvd_id)
+        {
+            //ストックDBのUpdateDateTimeの格納先。
+            List<string> Stock_Update_Date_Time_Storehouse = new List<string>();
+
+            int selected_id_num = a_selected_dvd_id.Count;
+            for (int i = 0; i < selected_id_num; i++)
+            {
+                string temp = null;
+                C_Sasaki_Common.SQL_Get_Update_Date_Time("Stock", "DVDId = " + a_selected_dvd_id[i], ref temp);
+                Stock_Update_Date_Time_Storehouse.Add(temp);
+            }
+
+            return Stock_Update_Date_Time_Storehouse;
+        }
+
+        //RentalDBのIdからUpdate_Date_Timeを求める
+        //[in] List<int>(a_selected_rentaldb_id) 選択されたレンタルDBのid群
+        //return List<string> a_selected_rentaldb_idの順に格納されたUpdateDateTime
+        public static List<string> Get_Rental_Update_Date_Time_For_Rental_Id(List<string> a_selected_rentaldb_id)
+        {
+            //ストックDBのUpdateDateTimeの格納先。
+            List<string> Update_Date_Time_Storehouse = new List<string>();
+
+            int selected_id_num = a_selected_rentaldb_id.Count;
+            for (int i = 0; i < selected_id_num; i++)
+            {
+                string temp = null;
+                C_Sasaki_Common.SQL_Get_Update_Date_Time("Rental", "Id = " + a_selected_rentaldb_id[i], ref temp);
+                Update_Date_Time_Storehouse.Add(temp);
+            }
+
+            return Update_Date_Time_Storehouse;
+        }
 
     }
 }

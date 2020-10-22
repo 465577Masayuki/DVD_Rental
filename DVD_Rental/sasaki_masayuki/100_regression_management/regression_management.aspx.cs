@@ -47,6 +47,12 @@ namespace DVD_Rental.sasaki_masayuki._100_regression_management
                 Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
                 Response.Redirect("./../../login.aspx");
             }
+
+            //確認画面からのエラーがあれば表示する
+            if(Session["confirmation_error"] != null)
+            {
+                Label3.Text = Session["confirmation_error"].ToString();
+            }
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -92,11 +98,27 @@ namespace DVD_Rental.sasaki_masayuki._100_regression_management
                         //格納。
                         selected_dvd_id.Add(name_to_id);
 
+
+
                     }
                 }
                 //1つ以上選択されたDVDがあるか
                 if (selected_dvd_id.Count != 0)
                 {
+                    Label3.Text = "";
+                    List<string> stock_update_date_time_storehouse;
+                    //dvd_idからUpdate_Date_Timeを求める
+                    stock_update_date_time_storehouse = C_Sasaki_Common.Get_Stock_Update_Date_Time_For_DVD_Id(selected_dvd_id);
+
+                    List<string> rental_update_date_time_storehouse;
+                    //レンタルDBのIdからUpdate_Date_Timeを求める
+                    rental_update_date_time_storehouse = C_Sasaki_Common.Get_Rental_Update_Date_Time_For_Rental_Id(selected_id);
+
+
+                    //返却管理画面で返却を押した時のUpdateDateTimeを格納。
+                    Session["management_time_stock_update_datetime"] = string.Join(",", stock_update_date_time_storehouse);
+                    Session["management_time_rental_update_datetime"] = string.Join(",", rental_update_date_time_storehouse);
+
                     Session["Member_ID"] = m_member_id;
                     Session["Select_DVD_ID"] = string.Join(",", selected_dvd_id);
                     Session["Selected_ID"] = string.Join(",", selected_id);
@@ -186,5 +208,7 @@ namespace DVD_Rental.sasaki_masayuki._100_regression_management
             Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
             Response.Redirect("./../../login.aspx");
         }
+
+        
     }
 }
