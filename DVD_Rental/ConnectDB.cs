@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web;
+using DVD_Rental.sasaki_masayuki._0_common;
 
 namespace DVD_Rental
 {
@@ -11,7 +12,9 @@ namespace DVD_Rental
     {
         public string [] auth(string id , string pw)
         {
-            String connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=true";
+            //String connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=true";
+            String connectionString = null;
+            C_Sasaki_Common.Generate_A_Strin_To_Connect_To_The_SQL(ref connectionString);
             SqlConnection objConn = new SqlConnection(connectionString);
             objConn.Open();
 

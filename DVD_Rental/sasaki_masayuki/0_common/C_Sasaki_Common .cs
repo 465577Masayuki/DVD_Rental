@@ -37,7 +37,7 @@ namespace DVD_Rental.sasaki_masayuki._0_common
 
         //SQLに接続するための文字列を生成する関数
         //[out] ref string(a_connection_str_storehouse) 格納先
-        private static void Generate_A_Strin_To_Connect_To_The_SQL(ref string a_connection_str_storehouse)
+        public static void Generate_A_Strin_To_Connect_To_The_SQL(ref string a_connection_str_storehouse)
         {
             //ローカルサーバーなら
             {
