@@ -9,12 +9,45 @@ namespace DVD_Rental.sasaki_masayuki._0_common
 {
     public class C_Sasaki_Common
     {
+
         //例外をデバッグ出力します。
         public static void Catch_An_Exception(Exception e)
         {
             System.Diagnostics.Debug.WriteLine("例外をキャッチ");
             System.Diagnostics.Debug.Write(e.Message);
             System.Diagnostics.Debug.WriteLine("\n");
+        }
+
+        private static string Get_SQL_Connection_Str_Ver_Remote_SV()
+        {
+            string sConnectlonStrlng =
+                    "Addr = 192.168.10.201;"
+                + "User Id = sa;"
+                + "password = P@ssw0rd;"
+                + "Initial Catalog = DVDRentalDB;"
+                + "Integrated Security = false";
+            return sConnectlonStrlng;
+        }
+
+        private static string Get_SQL_Connection_Str_Ver_Local_SV()
+        {
+            string connection_csring = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=True";
+            return connection_csring;
+        }
+
+        //SQLに接続するための文字列を生成する関数
+        //[out] ref string(a_connection_str_storehouse) 格納先
+        private static void Generate_A_Strin_To_Connect_To_The_SQL(ref string a_connection_str_storehouse)
+        {
+            //ローカルサーバーなら
+            {
+                a_connection_str_storehouse = Get_SQL_Connection_Str_Ver_Local_SV();
+            }
+            //リモートサーバーなら
+            {
+                //a_connection_str_storehouse = Get_SQL_Connection_Str_Ver_Remote_SV();
+            }
+            
         }
 
         //SQLのSELECT実行関数(データリーダ)※一つの項目しか取得できないのでおすすめしません。またsql_strにselect以外の命令はしないでください。
@@ -25,7 +58,8 @@ namespace DVD_Rental.sasaki_masayuki._0_common
         {
             try
             {
-                string connection_csring = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=True";
+                string connection_csring = null;
+                Generate_A_Strin_To_Connect_To_The_SQL(ref connection_csring);
                 SqlConnection sql_connection = new SqlConnection(connection_csring);
 
                 sql_connection.Open();
@@ -60,7 +94,8 @@ namespace DVD_Rental.sasaki_masayuki._0_common
         {
             try
             {
-                string connection_csring = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=True";
+                string connection_csring = null;
+                Generate_A_Strin_To_Connect_To_The_SQL(ref connection_csring);
                 SqlConnection sql_connection = new SqlConnection(connection_csring);
 
                 sql_connection.Open();
@@ -94,7 +129,8 @@ namespace DVD_Rental.sasaki_masayuki._0_common
         {
             try 
             {
-                string connection_csring = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=True";
+                string connection_csring = null;
+                Generate_A_Strin_To_Connect_To_The_SQL(ref connection_csring);
                 SqlConnection sql_connection = new SqlConnection(connection_csring);
 
                 sql_connection.Open();
