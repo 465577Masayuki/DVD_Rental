@@ -7,11 +7,11 @@
 // </自動生成>
 //------------------------------------------------------------------------------
 
-namespace DVD_Rental
+namespace Rental_Form
 {
 
 
-    public partial class WebForm1
+    public partial class RentalConfirm
     {
 
         /// <summary>
@@ -24,6 +24,24 @@ namespace DVD_Rental
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Label1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// BulletedList1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList BulletedList1;
+
+        /// <summary>
         /// Button1 コントロール。
         /// </summary>
         /// <remarks>
@@ -31,5 +49,14 @@ namespace DVD_Rental
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// Button2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }

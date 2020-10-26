@@ -20,7 +20,7 @@ namespace DVD_Rental
                     {
                         if (Session[Request.Cookies["login"].Value].ToString() == "0")
                         {
-                            Response.Redirect("rental.aspx");
+                            Response.Redirect("RentalForm.aspx");
                         }
                         else if(Session[Request.Cookies["login"].Value].ToString() == "1")
                         {
@@ -97,7 +97,7 @@ namespace DVD_Rental
                             Session[status[1]] = "0";
                             Response.Cookies["login"].Value = status[1];
                             Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
-                            Response.Redirect("rental.aspx");
+                            Response.Redirect("RentalForm.aspx");
                         }
                     }
                     catch(Exception err)
@@ -133,5 +133,6 @@ namespace DVD_Rental
                 }
             }
         }
+
     }
 }

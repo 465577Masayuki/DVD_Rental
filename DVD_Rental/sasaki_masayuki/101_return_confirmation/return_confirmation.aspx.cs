@@ -23,7 +23,7 @@ namespace DVD_Rental.sasaki_masayuki._101_return_confirmation
                     {
                         if (Session[Request.Cookies["login"].Value].ToString() == "0")
                         {
-                            Response.Redirect("./../../rental.aspx");
+                            Response.Redirect("./../../RentalForm.aspx");
                         }
                     }
                     else
