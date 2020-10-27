@@ -55,18 +55,7 @@ namespace Rental_Form
             Button1.Text = "キャンセル";
             Button2.Text = "確定";
 
-            if (Session["DvdID"] != null)
-            {
-                //セッションの中身がnullじゃない場合
 
-                string dvd_id = null;
-                dvd_id = Session["DvdID"].ToString();
-                string[] dvd_id_arr = dvd_id.Split(',');
-                foreach (string i in dvd_id_arr)
-                {
-                    DvdID.Add(int.Parse(i));
-                }
-            }
 
             // 入力されたメンバーIDを取得
             MemberID = int.Parse(Session["MemberID"].ToString());
@@ -109,7 +98,18 @@ namespace Rental_Form
         protected void Button2_Click(object sender, EventArgs e)
         {
             // 確定ボタン
+            if (Session["DvdID"] != null)
+            {
+                //セッションの中身がnullじゃない場合
 
+                string dvd_id = null;
+                dvd_id = Session["DvdID"].ToString();
+                string[] dvd_id_arr = dvd_id.Split(',');
+                foreach (string i in dvd_id_arr)
+                {
+                    DvdID.Add(int.Parse(i));
+                }
+            }
             InsertDateTime = DateTime.Now;
 
             string connection_csring = null;
