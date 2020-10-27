@@ -109,7 +109,8 @@ namespace Rental_Form
                 {
                     DvdID.Add(int.Parse(i));
                 }
-            }
+            }            
+            
             InsertDateTime = DateTime.Now;
 
             string connection_csring = null;
@@ -131,6 +132,10 @@ namespace Rental_Form
             // レンタル画面時のUpdateDateTimeを格納
             string RentalForm_Stock_UpdateDateTime_str = Session["RentalForm_Stock_UpdateDateTime"].ToString();
             string[] RentalForm_UpdateDateTime = RentalForm_Stock_UpdateDateTime_str.Split(',');
+
+            List<string> Stock_Quantity_str = new List<string>();
+            C_Sasaki_Common.Select_SQL("Select * From [dbo].[Stock] ", "Quantity", Stock_Quantity_str);
+
 
             // レンタル確認画面時のUpdateDateTimeを格納
             List<string> Confirm_Stock_UpdateDateTime = C_Sasaki_Common.Get_Stock_Update_Date_Time_For_DVD_Id(DvdID_str);
@@ -181,8 +186,20 @@ namespace Rental_Form
                         C_Sasaki_Common.Update_SQL("Update [dbo].[Stock] SET UpdateDateTime = '" + dt.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' Where DVDId = " + DvdID[i]);
                         //更新者を現在のユーザーに設定
                         C_Sasaki_Common.Update_SQL("Update [dbo].[Stock] SET UpdateUserId = " + InsertUserID + " Where DVDId = " + DvdID[i]);
-                        //Stockを増やす。
-                        C_Sasaki_Common.Update_SQL("Update[dbo].[Stock] SET Quantity -= 1 Where DVDId = " + DvdID[i]);
+
+                        if (DvdID[i] != 11)
+                        {
+                            if (Stock_Quantity_str[DvdID[i]-1] != "0")
+                                C_Sasaki_Common.Update_SQL("Update[dbo].[Stock] SET Quantity -= 1 Where DVDId = " + DvdID[i]);
+                        }
+                        else
+                        {
+                            if (Stock_Quantity_str[9] != "0")
+                                C_Sasaki_Common.Update_SQL("Update[dbo].[Stock] SET Quantity -= 1 Where DVDId = " + DvdID[i]);
+
+
+                        }
+
                     }
 
                     sqlcommand.ExecuteNonQuery();

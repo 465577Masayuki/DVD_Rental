@@ -106,6 +106,10 @@ namespace Rental_Form
                 }
             }
 
+            // Stockにそもそもないからチェック不可にする
+            CheckBoxList1.Items[9].Enabled = false;
+            CheckBoxList1.Items[11].Enabled = false;
+
 
             sqlDataReader.Close();
             sqlConnection.Close();
@@ -136,6 +140,7 @@ namespace Rental_Form
             if (MemberIDText != "" && ID_Check == true)
             {
                 Label1.Text = "";
+                Label2.ForeColor = Color.Black;
                 Session.Remove("confirmation_error");
 
                 int count = 1;                // DVDIDカウント
