@@ -53,6 +53,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -70,9 +71,12 @@
     <Content Include="admin_page.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="rental.aspx" />
+    <Content Include="RentalConfirm.aspx" />
+    <Content Include="RentalForm.aspx" />
     <Content Include="sasaki_masayuki\100_regression_management\regression_management.aspx" />
     <Content Include="sasaki_masayuki\101_return_confirmation\return_confirmation.aspx" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin_page.aspx.cs">
@@ -98,18 +102,41 @@
     <Compile Include="rental.aspx.designer.cs">
       <DependentUpon>rental.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RentalConfirm.aspx.cs">
+      <DependentUpon>RentalConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RentalConfirm.aspx.designer.cs">
+      <DependentUpon>RentalConfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RentalForm.aspx.cs">
+      <DependentUpon>RentalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RentalForm.aspx.designer.cs">
+      <DependentUpon>RentalForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="sasaki_masayuki\0_common\C_Sasaki_Common .cs" />
     <Compile Include="sasaki_masayuki\100_regression_management\regression_management.aspx.cs">
       <DependentUpon>regression_management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="sasaki_masayuki\100_regression_management\regression_management.aspx.designer.cs">
       <DependentUpon>regression_management.aspx</DependentUpon>
     </Compile>
     <Compile Include="sasaki_masayuki\101_return_confirmation\return_confirmation.aspx.cs">
       <DependentUpon>return_confirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="sasaki_masayuki\101_return_confirmation\return_confirmation.aspx.designer.cs">
       <DependentUpon>return_confirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
