@@ -13,14 +13,17 @@
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             <br />
         </div>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="margin-left: 255px" Text="Button" Width="122px" />
+        &nbsp;
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="margin-left: 255px" Text="ログアウト" Width="122px" />
         <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 会員ID&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox1" runat="server" style="margin-top: 0px"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="Label2" runat="server" Text="会員ID"></asp:Label>
+        &nbsp;<asp:TextBox ID="TextBox1" runat="server" style="margin-top: 0px" OnTextChanged="TextBox1_TextChanged" TextMode ="Number"></asp:TextBox>
         <br />
-        商品一覧<asp:CheckBoxList ID="CheckBoxList1" runat="server" Height="21px" Width="383px">
+        <asp:Label ID="Label3" runat="server" Text="商品一覧"></asp:Label>
+        <asp:CheckBoxList ID="CheckBoxList1" runat="server" Height="21px" Width="383px">
         </asp:CheckBoxList>
-        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" style="margin-left: 135px" Text="Button" Width="250px" />
+        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" style="margin-left: 135px" Text="選択した商品をレンタル" Width="250px" />
         <br />
     </form>
 </body>

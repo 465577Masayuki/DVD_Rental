@@ -20,6 +20,7 @@ namespace Rental_Form
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // ログイン関連処理
             if (Request.Cookies["login"] != null)
             {
                 if (Request.Cookies["login"].Value != "")
@@ -51,7 +52,6 @@ namespace Rental_Form
             }
 
 
-
             Button1.Text = "キャンセル";
             Button2.Text = "確定";
 
@@ -68,18 +68,19 @@ namespace Rental_Form
                 }
             }
 
-
+            // 入力されたメンバーIDを取得
             MemberID = int.Parse(Session["MemberID"].ToString());
+
             if (!IsPostBack)
             {
-                  
+
                 // ポストバックじゃなければ
                 BulletedList1.Items.Clear();
 
                 // レンタルしたDVDを名前からIDに変換し、リストに追加
                 for (int i = 1; i <= 12; i++)
                 {
-                    if (Session["DVD" + i.ToString()]  != null)
+                    if (Session["DVD" + i.ToString()] != null)
                     {
                         if (Session["DVD" + i.ToString()].ToString() != "")
                         {
@@ -87,15 +88,13 @@ namespace Rental_Form
                             BulletedList1.Items.Add(Session["DVD" + i.ToString()] as string);
                             DvdID.Add(int.Parse(C_Sasaki_Common.Convert_DVD_Name_To_ID(Session["DVD" + i.ToString()].ToString())));
                             DvdID_str.Add(C_Sasaki_Common.Convert_DVD_Name_To_ID(Session["DVD" + i.ToString()].ToString()));
-                           
+
                         }
                     }
-                    
+
                 }
                 Session["DvdID"] = string.Join(",", DvdID);
-
             }
-
 
             Label1.Text = "以下の" + BulletedList1.Items.Count + "点の商品をレンタルします";
 
@@ -103,37 +102,36 @@ namespace Rental_Form
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            // キャンセルボタン
             Response.Redirect("RentalForm.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-
+            // 確定ボタン
 
             InsertDateTime = DateTime.Now;
 
-            string max_id = null;
-            C_Sasaki_Common.Select_SQL("Select MAX(Id) as Id  From [dbo].[Rental]", "Id", ref max_id);
-
-
             string connection_csring = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=True";
             SqlConnection sql_connection = new SqlConnection(connection_csring);
-            
-
-            sql_connection.Open();            
+            sql_connection.Open();
             SqlCommand sqlcommand = sql_connection.CreateCommand();
 
-
+            // Rentalの最後のIDを取得
+            string max_id = null;
+            C_Sasaki_Common.Select_SQL("Select MAX(Id) as Id  From [dbo].[Rental]", "Id", ref max_id);
             Id = int.Parse(max_id);
 
             int limit = DvdID.Count();
-           
+
             // ログインしているユーザーIDを持ってくる
             int InsertUserID = C_Sasaki_Common.Login_Name_To_Id(Request);
 
+            // レンタル画面時のUpdateDateTimeを格納
             string RentalForm_Stock_UpdateDateTime_str = Session["RentalForm_Stock_UpdateDateTime"].ToString();
             string[] RentalForm_UpdateDateTime = RentalForm_Stock_UpdateDateTime_str.Split(',');
 
+            // レンタル確認画面時のUpdateDateTimeを格納
             List<string> Confirm_Stock_UpdateDateTime = C_Sasaki_Common.Get_Stock_Update_Date_Time_For_DVD_Id(DvdID_str);
 
             //datetimeが一致するか確認
@@ -161,9 +159,9 @@ namespace Rental_Form
                 // 日時を求める
                 DateTime dt = DateTime.Now;
 
-                // レンタルしたものをインサートする
                 for (int i = 0; i < limit; i++)
                 {
+                    // レンタルしたものをインサートする
                     sqlcommand.CommandText = Up_To_Insert_SQL() +
                             "( "
                             + (Id + i + 1) + ","                                                      // ID
@@ -197,12 +195,12 @@ namespace Rental_Form
             }
             sqlcommand.Dispose();
 
-                sql_connection.Close();
-                sql_connection.Dispose();
+            sql_connection.Close();
+            sql_connection.Dispose();
 
-                Response.Redirect("RentalForm.aspx");
+            Response.Redirect("RentalForm.aspx");
 
-            
+
         }
 
         //InsertのSQLのValueまでの文字列
@@ -218,8 +216,3 @@ namespace Rental_Form
 
 }
 
-
-//catch (Exception exec)
-//{
-//    C_Sasaki_Common.Catch_An_Exception(exec);
-//}
