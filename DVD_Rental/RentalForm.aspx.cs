@@ -57,7 +57,8 @@ namespace Rental_Form
                 Label1.Text = Session["confirmation_error"].ToString();
             }
 
-            string connectionString = "Data Source = .\\SQLEXPRESS;" + "Initial Catalog = DVDRentalDB ;" + "Integrated Security = True ;";
+            string connectionString = null;
+            C_Sasaki_Common.Generate_A_Strin_To_Connect_To_The_SQL(ref connectionString);
             sqlConnection = new SqlConnection(connectionString);
 
             sqlConnection.Open();

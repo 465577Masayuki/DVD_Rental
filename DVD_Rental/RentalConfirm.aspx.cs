@@ -112,7 +112,8 @@ namespace Rental_Form
 
             InsertDateTime = DateTime.Now;
 
-            string connection_csring = "Data Source=.\\SQLEXPRESS;Initial Catalog=DVDRentalDB;Integrated Security=True";
+            string connection_csring = null;
+            C_Sasaki_Common.Generate_A_Strin_To_Connect_To_The_SQL(ref connection_csring);
             SqlConnection sql_connection = new SqlConnection(connection_csring);
             sql_connection.Open();
             SqlCommand sqlcommand = sql_connection.CreateCommand();
