@@ -12,7 +12,7 @@
         <%-- 1行目--%>
         <p>
 
-            <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
+            <asp:Label ID="Label3" runat="server" Text="" ></asp:Label>
 
         </p>
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -52,6 +53,7 @@ namespace DVD_Rental.sasaki_masayuki._100_regression_management
             if(Session["confirmation_error"] != null)
             {
                 Label3.Text = Session["confirmation_error"].ToString();
+                Label3.ForeColor = Color.Red;
             }
         }
 
