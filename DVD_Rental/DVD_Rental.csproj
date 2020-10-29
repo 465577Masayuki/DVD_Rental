@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin_page.aspx" />
+    <Content Include="css\style.css" />
     <Content Include="Login.aspx" />
     <Content Include="rental.aspx" />
     <Content Include="RentalConfirm.aspx" />
