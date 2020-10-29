@@ -52,6 +52,7 @@ namespace DVD_Rental
             {
                 Session["id_err_flag"] = 0;
                 Session["pw_err_flag"] = 0;
+                Session["failed_login"] = 0;
             }
         }
 
@@ -82,6 +83,7 @@ namespace DVD_Rental
                             //管理者フラグ成立
                             Session.Remove("id_err_flag");
                             Session.Remove("pw_err_flag");
+                            Session.Remove("failed_login");
 
                             Session[status[1]] = "1";
                             Response.Cookies["login"].Value = status[1];
@@ -93,6 +95,7 @@ namespace DVD_Rental
                             //管理者フラグ非成立
                             Session.Remove("id_err_flag");
                             Session.Remove("pw_err_flag");
+                            Session.Remove("failed_login");
 
                             Session[status[1]] = "0";
                             Response.Cookies["login"].Value = status[1];
@@ -105,6 +108,9 @@ namespace DVD_Rental
                         if (status[0] == "-1")
                         {
                             //ログインできない
+                            Session["id_err_flag"] = 0;
+                            Session["pw_err_flag"] = 0;
+                            Session["failed_login"] = 1;
                         }
                     }
 
@@ -113,6 +119,8 @@ namespace DVD_Rental
                 {
                     //パスワードのエラー
                     Session["pw_err_flag"] = 1;
+                    Session["failed_login"] = 0;
+                    Session["id_err_flag"] = 0;
                 }
             }
             else
@@ -124,12 +132,14 @@ namespace DVD_Rental
                     //IDのエラー
                     Session["pw_err_flag"] = 0;
                     Session["id_err_flag"] = 1;
+                    Session["failed_login"] = 0;
                 }
                 else
                 {
                     //IDとパスワードのエラー
                     Session["id_err_flag"] = 1;
                     Session["pw_err_flag"] = 1;
+                    Session["failed_login"] = 0;
                 }
             }
         }

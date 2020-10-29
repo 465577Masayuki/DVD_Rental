@@ -79,3 +79,20 @@ input::placeholder{
 .text:focus + .underline{
     transform: scaleX(1);
 }
+
+.login_btn{
+    padding: 7px;
+    background: rgba(255,255,255,.5);
+    outline: none;
+    border: none;
+    transition: transform 0.5s;
+}
+
+.login_btn:hover{
+    transform: rotateY(360deg);
+}
+
+#err_notification span{
+    color: red;
+    font-size: 10px;
+}
