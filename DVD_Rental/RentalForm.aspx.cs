@@ -52,9 +52,9 @@ namespace Rental_Form
 
             Label1.Text = "";
             //確認画面からのエラーがあれば表示する
-            if (Session["confirmation_error"] != null)
+            if (Session["Rental_Comfirm_error"] != null)
             {
-                Label1.Text = Session["confirmation_error"].ToString();
+                Label1.Text = Session["Rental_Comfirm_error"].ToString();
             }
 
             string connectionString = null;
@@ -94,17 +94,18 @@ namespace Rental_Form
                     CheckBoxList1.Items.Add(str);
 
                 }
-
-            }
-
-            // 在庫の数が０より少なかったらチェックできなくする
-            for (int i = 0; i < Stock_Quantity.Count; i++)
-            {
-                if (Stock_Quantity[i] <= 0)
+                // 在庫の数が０より少なかったらチェックできなくする
+                for (int i = 0; i < Stock_Quantity.Count; i++)
                 {
-                    CheckBoxList1.Items[i].Enabled = false;
+                    if (Stock_Quantity[i] <= 0)
+                    {
+                        CheckBoxList1.Items[i].Enabled = false;
+                        CheckBoxList1.Items[i].Text += " 在庫切れ";
+                    }
                 }
             }
+
+
 
             // Stockにそもそもないからチェック不可にする
             CheckBoxList1.Items[9].Enabled = false;
@@ -140,8 +141,9 @@ namespace Rental_Form
             if (MemberIDText != "" && ID_Check == true)
             {
                 Label1.Text = "";
+                Label4.Text = "";
                 Label2.ForeColor = Color.Black;
-                Session.Remove("confirmation_error");
+                Session.Remove("Rental_Comfirm_error");
 
                 int count = 1;                // DVDIDカウント
 
@@ -274,15 +276,27 @@ namespace Rental_Form
 
 
             }
-            else
+            else if(MemberIDText == "")
             {
+                Label4.Text = "会員IDが空欄です。入力してください。";
                 Label2.ForeColor = Color.Red;
+                Label4.ForeColor = Color.Red;
+
+
             }
+            else if (ID_Check == false)
+            {
+                Label4.Text = "入力された会員IDは見つかりませんでした。";
+                Label2.ForeColor = Color.Red;
+                Label4.ForeColor = Color.Red;
+            }
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             // ログアウト処理
+            Rental_Logout();
             Session[Request.Cookies["login"].Value] = null;
             Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
             Response.Redirect("Login.aspx");
@@ -307,6 +321,11 @@ namespace Rental_Form
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Rental_Logout()
+        {
+            Session.RemoveAll();
         }
     }
 }

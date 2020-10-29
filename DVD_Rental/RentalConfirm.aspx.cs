@@ -209,7 +209,7 @@ namespace Rental_Form
             else
             {
                 //一致していない
-                Session["confirmation_error"] = "レンタル確認時にエラー(競合)が発生しました。もう一度やり直してください。";
+                Session["Rental_Comfirm_error"] = "レンタル確認時にエラー(競合)が発生しました。もう一度やり直してください。";
             }
             sqlcommand.Dispose();
 
