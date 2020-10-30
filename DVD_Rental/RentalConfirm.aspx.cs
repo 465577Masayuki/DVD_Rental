@@ -52,11 +52,6 @@ namespace Rental_Form
             }
 
 
-            Button1.Text = "キャンセル";
-            Button2.Text = "確定";
-
-
-
             // 入力されたメンバーIDを取得
             MemberID = int.Parse(Session["MemberID"].ToString());
 
