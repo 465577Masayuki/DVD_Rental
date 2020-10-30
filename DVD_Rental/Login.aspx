@@ -14,41 +14,33 @@
     <div class="bg bg3"></div>
     <form id="form1" runat="server">
         <div class="wrap">
-            <div id="err_notification">
-                <span id="err"></span>
-            </div>
             <div class="text_area">
                 <asp:TextBox ID="user_id" CssClass="text" runat="server" MaxLength="15" placeholder="ID"></asp:TextBox>
-                <div id="id_underline" class="underline"></div>
+                <div class="underline"></div>
             </div>
             <div class="text_area">
                 <asp:TextBox ID="passwd" CssClass="text" runat="server" TextMode="Password" MaxLength="25" placeholder="Password"></asp:TextBox>
-                <div id="pw_underline" class="underline"></div>
+                <div class="underline"></div>
             </div>
             <div class="button_area">
-                <asp:Button ID="Button1" CssClass="login_btn" runat="server" Text="Login" OnClick="Button1_Click" />
+                <asp:Button ID="Button1" runat="server" Text="ログイン" OnClick="Button1_Click" />
             </div>
         </div>
     </form>
 
     <script>
-        document.getElementById("err_notification").style.display = "none";
-        if (<%=Session["id_err_flag"] %> && <%=Session["pw_err_flag"] %>) {
-            document.getElementById("err").innerText = "IDとパスワードの入力値を確認してください。";
-            document.getElementById("err_notification").style.display = "block";
-            document.getElementById("id_underline").style.background = "red";
-            document.getElementById("pw_underline").style.background = "red";
-        } else if (<%=Session["id_err_flag"] %>) {
-            document.getElementById("err").innerText = "IDの入力値を確認してください。";
-            document.getElementById("err_notification").style.display = "block";
-            document.getElementById("id_underline").style.background = "red";
-        } else if (<%=Session["pw_err_flag"] %>) {
-            document.getElementById("err").innerText = "パスワードの入力値を確認してください。";
-            document.getElementById("err_notification").style.display = "block";
-            document.getElementById("pw_underline").style.background = "red";
-        } else if (<%=Session["failed_login"] %>) {
-            document.getElementById("err").innerText = "ログインに失敗しました。";
-            document.getElementById("err_notification").style.display = "block";
+        if (<%=Session["id_err_flag"] %>) {
+            //document.getElementById("Label1").style.color = "#ff0000";
+        }
+        else {
+            //document.getElementById("Label1").style.color = "#000000";
+        }
+
+        if (<%=Session["pw_err_flag"] %>) {
+            //document.getElementById("Label2").style.color = "#ff0000";
+        }
+        else {
+            //document.getElementById("Label2").style.color = "#000000";
         }
     </script>
 </body>

@@ -69,11 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin_page.aspx" />
-<<<<<<< HEAD
     <Content Include="css\Rental_Style.css" />
-=======
-    <Content Include="css\sasaki_style.css" />
->>>>>>> 646c798269fdc0595a2f4704654e5d63e910480d
     <Content Include="css\style.css" />
     <Content Include="Login.aspx" />
     <Content Include="rental.aspx" />
