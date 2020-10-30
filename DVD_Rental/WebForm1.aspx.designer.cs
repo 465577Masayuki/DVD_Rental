@@ -11,7 +11,7 @@ namespace DVD_Rental
 {
 
 
-    public partial class Login
+    public partial class WebForm1
     {
 
         /// <summary>
@@ -22,24 +22,6 @@ namespace DVD_Rental
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// user_id コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox user_id;
-
-        /// <summary>
-        /// passwd コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox passwd;
 
         /// <summary>
         /// Button1 コントロール。

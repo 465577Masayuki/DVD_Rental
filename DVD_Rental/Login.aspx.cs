@@ -12,10 +12,47 @@ namespace DVD_Rental
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (Request.Cookies["login"] != null)
+            {
+                if (Request.Cookies["login"].Value != "")
+                {
+                    if (Session[Request.Cookies["login"].Value] != null)
+                    {
+                        if (Session[Request.Cookies["login"].Value].ToString() == "0")
+                        {
+                            Response.Redirect("RentalForm.aspx");
+                        }
+                        else if(Session[Request.Cookies["login"].Value].ToString() == "1")
+                        {
+                            Response.Redirect("./sasaki_masayuki/100_regression_management/regression_management.aspx");
+                        }
+                        else
+                        {
+                            Session[Request.Cookies["login"].Value] = null;
+                            Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+                        }
+                    }
+                    else
+                    {
+                        Session[Request.Cookies["login"].Value] = null;
+                        Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+                    }
+                }
+                else
+                {
+                    Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+                }
+            }
+            else
+            {
+                Response.Cookies["login"].Expires = DateTime.Now.AddDays(-1);
+            }
+
+            if (!IsPostBack)
             {
                 Session["id_err_flag"] = 0;
                 Session["pw_err_flag"] = 0;
+                Session["failed_login"] = 0;
             }
         }
 
@@ -36,30 +73,54 @@ namespace DVD_Rental
 
 
                     //データベース
-                    /*ConnectDB db = new ConnectDB();
+                    ConnectDB db = new ConnectDB();
                     string[] status = db.auth(user_id.Text,passwd.Text);
 
-                    if(int.Parse(status[0]) == 1)
+                    try
                     {
-                        //管理者フラグ成立
-                        Session.Remove("id_err_flag");
-                        Session.Remove("pw_err_flag");
+                        if (Convert.ToBoolean(status[0]) == true)
+                        {
+                            //管理者フラグ成立
+                            Session.Remove("id_err_flag");
+                            Session.Remove("pw_err_flag");
+                            Session.Remove("failed_login");
+
+                            Session[status[1]] = "1";
+                            Response.Cookies["login"].Value = status[1];
+                            Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
+                            Response.Redirect("./sasaki_masayuki/100_regression_management/regression_management.aspx");
+                        }
+                        else if (Convert.ToBoolean(status[0]) == false)
+                        {
+                            //管理者フラグ非成立
+                            Session.Remove("id_err_flag");
+                            Session.Remove("pw_err_flag");
+                            Session.Remove("failed_login");
+
+                            Session[status[1]] = "0";
+                            Response.Cookies["login"].Value = status[1];
+                            Response.Cookies["login"].Expires = DateTime.Now.AddDays(1);
+                            Response.Redirect("RentalForm.aspx");
+                        }
                     }
-                    else if(int.Parse(status[0]) == 0)
+                    catch(Exception err)
                     {
-                        //管理者フラグ非成立
-                        Session.Remove("id_err_flag");
-                        Session.Remove("pw_err_flag");
+                        if (status[0] == "-1")
+                        {
+                            //ログインできない
+                            Session["id_err_flag"] = 0;
+                            Session["pw_err_flag"] = 0;
+                            Session["failed_login"] = 1;
+                        }
                     }
-                    else
-                    {
-                        //ログインできない
-                    }*/
+
                 }
                 else
                 {
                     //パスワードのエラー
                     Session["pw_err_flag"] = 1;
+                    Session["failed_login"] = 0;
+                    Session["id_err_flag"] = 0;
                 }
             }
             else
@@ -69,15 +130,19 @@ namespace DVD_Rental
                 if (new Regex("^[0-9a-zA-Z]+$").IsMatch(passwd.Text))
                 {
                     //IDのエラー
+                    Session["pw_err_flag"] = 0;
                     Session["id_err_flag"] = 1;
+                    Session["failed_login"] = 0;
                 }
                 else
                 {
                     //IDとパスワードのエラー
                     Session["id_err_flag"] = 1;
                     Session["pw_err_flag"] = 1;
+                    Session["failed_login"] = 0;
                 }
             }
         }
+
     }
 }
