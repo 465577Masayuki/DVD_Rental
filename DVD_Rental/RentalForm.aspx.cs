@@ -103,12 +103,13 @@ namespace Rental_Form
                         CheckBoxList1.Items[i].Text += " 在庫切れ";
                     }
                 }
-                // Stockにそもそもないからチェック不可にする
-                CheckBoxList1.Items[9].Enabled = false;
-                CheckBoxList1.Items[11].Enabled = false;
-                CheckBoxList1.Items[9].Text += " 在庫切れ";
-                CheckBoxList1.Items[11].Text += " 在庫切れ";
             }
+
+
+
+            // Stockにそもそもないからチェック不可にする
+            CheckBoxList1.Items[9].Enabled = false;
+            CheckBoxList1.Items[11].Enabled = false;
 
 
             sqlDataReader.Close();
