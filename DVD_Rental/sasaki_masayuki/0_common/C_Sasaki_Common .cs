@@ -41,11 +41,11 @@ namespace DVD_Rental.sasaki_masayuki._0_common
         {
             //ローカルサーバーなら
             {
-                a_connection_str_storehouse = Get_SQL_Connection_Str_Ver_Local_SV();
+                //a_connection_str_storehouse = Get_SQL_Connection_Str_Ver_Local_SV();
             }
             //リモートサーバーなら
             {
-                //a_connection_str_storehouse = Get_SQL_Connection_Str_Ver_Remote_SV();
+                a_connection_str_storehouse = Get_SQL_Connection_Str_Ver_Remote_SV();
             }
             
         }
